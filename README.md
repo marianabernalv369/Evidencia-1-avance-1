@@ -26,5 +26,5 @@ El sistema permitirá:
 - IntelliJ configurado  
 - Repositorio en GitHub creado   
 
----
-
+### Licencia
+Este proyecto es de uso academico y esta liberado por la licencia MIT
