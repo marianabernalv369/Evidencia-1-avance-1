@@ -1,0 +1,99 @@
+inicio
+precargarUsuariosAdmin() // e.g., admin / admin123 (hash en memoria)
+repetir
+mostrar("Usuario:")
+u <- leerLinea()
+mostrar("Contraseña:")
+p <- leerLineaOculta()
+usuario <- AuthService.login(u, p)
+si usuario == null entonces
+mostrar("Credenciales inválidas")
+sino
+ir a menuPrincipal(usuario)
+salir del bucle
+fin si
+hasta que false
+fin
+procedimiento menuPrincipal(usuario)
+repetir
+mostrarMenu()
+opcion <- leerEntero()
+segun opcion hacer
+1: altaDoctor()
+2: altaPaciente()
+3: crearCita()
+4: listarCitas()
+5: listarDoctores()
+6: listarPacientes()
+7: cerrarSesion(); salir del bucle
+otro: mostrar("Opción inválida")
+fin segun
+hasta que false
+fin procedimiento
+procedimiento altaDoctor()
+nombre <- leer("Nombre: ")
+especialidad <- leer("Especialidad: ")
+cedula <- leer("Cédula: ")
+telefono <- leer("Teléfono: ")
+correo <- leerOpcional("Correo (opcional): ")
+doctor <- Doctor(nuevoUUID(), nombre, especialidad, cedula, telefono, correo)
+DoctorRepo.guardar(doctor)
+mostrar("Doctor registrado: " + doctor.id)
+fin
+
+
+procedimiento altaPaciente()
+nombre <- leer("Nombre: ")
+idOficial <- leer("CURP/ID: ")
+telefono <- leer("Teléfono: ")
+correo <- leerOpcional("Correo (opcional): ")
+paciente <- Paciente(nuevoUUID(), nombre, idOficial, telefono, correo)
+PacienteRepo.guardar(paciente)
+mostrar("Paciente registrado: " + paciente.id)
+fin
+procedimiento crearCita()
+doctor <- seleccionarDoctor() // lista doctores y elige uno
+paciente <- seleccionarPaciente() // lista pacientes y elige uno
+textoFecha <- leer("Fecha y hora (yyyy-MM-dd HH:mm): ")
+fechaHora <- DateTimeUtil.parse(textoFecha)
+si fechaHora == null o fechaHora < ahora() entonces
+mostrar("Fecha/hora inválida")
+retornar
+fin si
+
+
+duracion <- 30 // minutos (configurable)
+si AgendaService.existeChoque(doctor.id, fechaHora, duracion) entonces
+mostrar("Conflicto: el doctor ya tiene una cita en ese horario.")
+retornar
+fin si
+
+
+cita <- Cita(nuevoUUID(), doctor.id, paciente.id, fechaHora, duracion)
+CitaRepo.guardar(cita)
+mostrar("Cita creada con ID: " + cita.id)
+fin
+funcion existeChoque(doctorId, nuevaInicio, duracionMin) regresa booleano
+nuevaFin <- nuevaInicio + minutos(duracionMin)
+citasDoctor <- CitaRepo.buscarPorDoctor(doctorId)
+para cada c en citasDoctor hacer
+cInicio <- c.fechaHoraInicio
+cFin <- c.fechaHoraInicio + minutos(c.duracionMin)
+si no( nuevaFin <= cInicio o nuevaInicio >= cFin ) entonces
+retornar verdadero // hay traslape
+fin si
+fin para
+retornar falso
+fin funcion
+procedimiento listarCitas()
+citas <- CitaRepo.todas()
+si vacio(citas) entonces mostrar("Sin citas") y retornar
+para cada c en citas hacer
+d <- DoctorRepo.buscarPorId(c.doctorId)
+p <- PacienteRepo.buscarPorId(c.pacienteId)
+mostrar( formatear("%s | Doctor: %s | Paciente: %s | %s-%s",
+c.id, d.nombre, p.nombre,
+formatearFechaHora(c.fechaHoraInicio),
+formatearFechaHora(c.fechaHoraInicio + minutos(c.duracionMin)) ) )
+fin para
+fin
