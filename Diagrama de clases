@@ -1,0 +1,31 @@
++------------------+ +------------------+ +------------------+
+| Doctor | | Paciente | | Cita |
++------------------+ +------------------+ +------------------+
+| - id: UUID | | - id: UUID | | - id: UUID |
+| - nombre: String | | - nombre: String | | - doctorId: UUID |
+| - especialidad | | - idOficial: Str | | - pacienteId:UUID|
+| - cedula: String | | - telefono: Str | | - fechaHora:DT |
+| - telefono: Str | | - correo: Str? | | - duracionMin:int|
+| - correo: Str? | +------------------+ +------------------+
++------------------+
+
+
++------------------+ +----------------------+
+| Usuario | | AgendaService |
++------------------+ +----------------------+
+| - id: UUID | | + altaDoctor(...) |
+| - username: Str | | + altaPaciente(...) |
+| - passwordHash:Str| | + crearCita(...) |
+| - rol: enum | | + listarCitas(...) |
++------------------+ | + validarChoque(...) |
++----------------------+
+
+
++----------------------+ +----------------------+
+| AuthService | | *Repos (interfaces)|
++----------------------+ +----------------------+
+| + login(u, p): Usuario|<-------------->| DoctorRepo |
++----------------------+ | PacienteRepo |
+| CitaRepo |
+| UsuarioRepo |
++----------------------+
