@@ -28,19 +28,3 @@ El sistema permitirá:
 
 ---
 
-##  Diagrama de flujo
-```mermaid
-flowchart TD
-    A[Inicio] --> B[Login Administrador]
-    B -->|Credenciales válidas| C[Mostrar menú principal]
-    B -->|Credenciales inválidas| A
-
-    C --> D[1. Dar de alta doctor]
-    C --> E[2. Dar de alta paciente]
-    C --> F[3. Crear cita]
-    C --> G[4. Salir]
-
-    D --> C
-    E --> C
-    F --> C
-    G --> H[Fin]
