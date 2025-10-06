@@ -1,30 +1,15 @@
-# Evidencia-1-avance-1
-Evidencia 1 – Avance 1  
-**Sistema de Administración de Citas para un Consultorio Clínico**
+# Evidencia 1 – Sistema de Citas (Java)
 
----
+## Descripción
+Aplicación base en Java que crea la carpeta `db/` y regenera los CSV necesarios (`doctores.csv`, `pacientes.csv`, `citas.csv`) al iniciar. El proyecto se publica en GitHub con ramas **master** (estable) y **develop** (integración), y versiones etiquetadas (por ejemplo `v1.0`, `v1.0.1`).
 
-##  Objetivo del proyecto
-El propósito de este proyecto es desarrollar un sistema en Java que simule la administración de citas en un consultorio clínico.  
-El sistema permitirá:  
-- Dar de alta doctores.  
-- Dar de alta pacientes.  
-- Crear una cita con fecha y hora.  
-- Relacionar una cita con un doctor y un paciente.  
-- Control de acceso mediante administradores (login con usuario y contraseña).  
+## Requisitos
+- Java 17+
+- IntelliJ IDEA (o cualquier IDE)
+- Git
 
----
+## Instalación y configuración
+```bash
+git clone https://github.com/marianabernalv369/Evidencia-1-avance-1.git
+cd Evidencia-1-avance-1
 
-## Ambiente de desarrollo
-- **Lenguaje:** Java 17   
-- **IDE:** IntelliJ IDEA Community Edition  
-- **Control de versiones:** Git + GitHub  
-- **Sistema Operativo de pruebas:** Windows 10  
-
-### Evidencia de configuración
-- Java instalado   
-- IntelliJ configurado  
-- Repositorio en GitHub creado   
-
-### Licencia
-Este proyecto es de uso academico y esta liberado por la licencia MIT
