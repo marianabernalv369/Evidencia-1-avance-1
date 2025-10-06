@@ -13,10 +13,3 @@ Aplicación base en Java que crea la carpeta `db/` y regenera los CSV necesarios
 git clone https://github.com/marianabernalv369/Evidencia-1-avance-1.git
 cd Evidencia-1-avance-1
 
-git checkout master
-git pull
-git merge --no-ff develop -m "docs: integrar README"
-git push
-
-
-
