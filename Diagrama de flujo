@@ -1,0 +1,21 @@
+[Inicio]
+|
+v
+[Login Admin]
+| Credenciales válidas?
++----No----> [Mensaje error] -> (reintentar / salir)
+|
+Sí
+v
+[Menú Principal]
+|--1) Alta Doctor -> [Capturar datos] -> [Guardar] -> [OK]
+|--2) Alta Paciente -> [Capturar datos] -> [Guardar] -> [OK]
+|--3) Crear Cita -> [Elegir Doctor] -> [Elegir Paciente]
+| -> [Fecha/Hora]
+| -> [Validar traslape]
+| -> (OK?)--Sí-->[Guardar]->[OK]
+|
+| No-->[Aviso conflicto]
+|--4) Listar Citas -> [Opcional filtros] -> [Mostrar]
+|--5) Listar Doctores/Pacientes -> [Mostrar]
+|--6) Cerrar Sesión -> [Fin]
